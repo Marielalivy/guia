@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría de Perfil e Impacto — Mariela Livy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple:#5B3FD4; --purple-l:#7B5CE5; --purple-p:#EDE9FF; --purple-d:#3A27A0;
+  --teal:#0F9B8E; --teal-l:#E0F5F3; --coral:#E85D2F;
+  --cream:#FAF8F4; --ink:#1A1624; --ink-mid:#4A4558; --ink-lite:#8B859E;
+  --border:rgba(91,63,212,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;overflow-x:hidden}
+
+/* HERO */
+.hero{background:var(--purple);color:#fff;padding:60px 24px 72px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:440px;height:440px;border-radius:50%;background:rgba(255,255,255,.05)}
+.hero::after{content:'';position:absolute;bottom:-70px;left:-50px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-inner{max-width:700px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.hero-text{grid-column:1}
+.hero-photo{grid-column:2;grid-row:1/4;align-self:center}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 16px;font-size:12px;font-weight:500;letter-spacing:.04em;margin-bottom:24px;color:rgba(255,255,255,.9)}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(28px,5.5vw,48px);line-height:1.15;margin-bottom:18px;font-weight:400}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,.65)}
+.hero-sub{font-size:17px;font-weight:300;color:rgba(255,255,255,.8);max-width:480px;margin-bottom:32px;line-height:1.6}
+.hero-author{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.65)}
+.hero-dot{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px;color:#fff;flex-shrink:0}
+
+/* Foto hero */
+.photo-circle{width:130px;height:130px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,.25);flex-shrink:0}
+.photo-circle img{width:100%;height:100%;object-fit:cover;object-position:top center}
+@media(max-width:560px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-photo{grid-column:1;grid-row:auto;display:flex;justify-content:center;margin-bottom:8px}
+  .photo-circle{width:100px;height:100px}
+}
+
+/* PAIN */
+.pain{background:#fff;padding:68px 24px}
+.section-inner{max-width:700px;margin:0 auto}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:14px}
+.pain h2{font-family:'DM Serif Display',serif;font-size:clamp(24px,4vw,34px);line-height:1.2;margin-bottom:28px;font-weight:400}
+.pain-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.pain-item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;background:var(--cream);border-radius:12px;border-left:3px solid var(--purple);font-size:15px;color:var(--ink-mid);line-height:1.55;transition:transform .15s}
+.pain-item:hover{transform:translateX(4px)}
+.pain-icon{font-size:18px;margin-top:1px;flex-shrink:0}
+
+/* CHECKLIST */
+.checklist-section{background:var(--purple-d);padding:68px 24px;color:#fff;position:relative;overflow:hidden}
+.checklist-section::before{content:'';position:absolute;top:-50px;right:-50px;width:250px;height:250px;border-radius:50%;background:rgba(255,255,255,.04)}
+.checklist-section h2{font-family:'DM Serif Display',serif;font-size:clamp(22px,4vw,32px);line-height:1.2;margin-bottom:8px;font-weight:400}
+.checklist-intro{font-size:15px;color:rgba(255,255,255,.7);margin-bottom:32px;max-width:500px}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:36px}
+.check-item{display:flex;align-items:flex-start;gap:13px;padding:14px 18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:10px;cursor:pointer;transition:background .15s;font-size:14.5px;color:rgba(255,255,255,.85);line-height:1.5}
+.check-item:hover{background:rgba(255,255,255,.11)}
+.check-item.checked{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.25)}
+.check-box{width:20px;min-width:20px;height:20px;border-radius:5px;border:2px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;flex-shrink:0}
+.check-item.checked .check-box{background:var(--teal);border-color:var(--teal)}
+.check-mark{display:none;color:#fff;font-size:12px}
+.check-item.checked .check-mark{display:block}
+.score-bar{background:rgba(255,255,255,.1);border-radius:100px;height:7px;margin-bottom:10px;overflow:hidden}
+.score-fill{height:100%;background:var(--teal);border-radius:100px;width:0%;transition:width .4s}
+.score-text{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:7px}
+.score-alert{display:none;padding:15px 18px;background:rgba(232,93,47,.2);border:1px solid rgba(232,93,47,.4);border-radius:10px;font-size:14.5px;color:rgba(255,255,255,.9);line-height:1.55}
+.score-alert.visible{display:block}
+
+/* MÉTODO */
+.formula{background:var(--cream);padding:68px 24px}
+.formula h2{font-family:'DM Serif Display',serif;font-size:clamp(22px,4vw,32px);line-height:1.2;margin-bottom:32px;font-weight:400}
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:18px;padding-bottom:28px;position:relative}
+.step:not(:last-child)::after{content:'';position:absolute;left:13px;top:40px;bottom:0;width:1px;background:var(--border)}
+.step-num{width:28px;min-width:28px;height:28px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;margin-top:2px}
+.step-content h3{font-size:16px;font-weight:600;margin-bottom:5px}
+.step-content p{font-size:14.5px;color:var(--ink-mid);line-height:1.6}
+
+/* FORM */
+.form-section{background:#fff;padding:68px 24px;border-top:1px solid var(--border)}
+.form-card{background:var(--purple);border-radius:20px;padding:44px 38px;color:#fff;max-width:540px;margin:0 auto;position:relative;overflow:hidden}
+.form-card::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
+.form-card h2{font-family:'DM Serif Display',serif;font-size:clamp(20px,4vw,28px);font-weight:400;line-height:1.25;margin-bottom:10px}
+.form-card > p{font-size:14.5px;color:rgba(255,255,255,.72);margin-bottom:28px;line-height:1.6;position:relative;z-index:1}
+.form-group{margin-bottom:14px;position:relative;z-index:1}
+.form-group label{display:block;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.7);margin-bottom:6px}
+.form-group input{width:100%;padding:13px 15px;border-radius:10px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s,background .15s}
+.form-group input::placeholder{color:rgba(255,255,255,.33)}
+.form-group input:focus{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.15)}
+.btn-primary{width:100%;padding:15px 22px;border-radius:12px;border:none;background:#fff;color:var(--purple);font-size:15.5px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;margin-top:6px;transition:transform .12s,box-shadow .12s;position:relative;z-index:1}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.2)}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.form-privacy{font-size:11.5px;color:rgba(255,255,255,.4);text-align:center;margin-top:12px;position:relative;z-index:1}
+.form-success{display:none;text-align:center;padding:16px 0;position:relative;z-index:1}
+.success-icon{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:26px}
+.form-success h3{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:10px}
+.form-success p{font-size:14px;color:rgba(255,255,255,.72);margin-bottom:24px}
+.btn-wa{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:12px;background:#fff;color:var(--purple);font-weight:600;font-size:14.5px;text-decoration:none;transition:transform .12s}
+.btn-wa:hover{transform:translateY(-2px)}
+
+/* TESTIMONIOS */
+.testimonios{background:var(--cream);padding:68px 24px}
+.testimonios h2{font-family:'DM Serif Display',serif;font-size:clamp(22px,4vw,32px);font-weight:400;margin-bottom:32px;line-height:1.2}
+.testi-grid{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:580px){.testi-grid{grid-template-columns:1fr 1fr}}
+.testi-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--border)}
+.testi-stars{color:var(--purple);font-size:13px;margin-bottom:10px;letter-spacing:2px}
+.testi-text{font-size:13.5px;color:var(--ink-mid);line-height:1.65;margin-bottom:14px;font-style:italic}
+.testi-author{font-size:13px;font-weight:600;color:var(--ink)}
+.testi-role{font-size:11.5px;color:var(--ink-lite);margin-top:2px}
+
+/* CTA FINAL */
+.cta-final{background:var(--ink);color:#fff;padding:76px 24px;text-align:center}
+.cta-final h2{font-family:'DM Serif Display',serif;font-size:clamp(24px,5vw,40px);font-weight:400;line-height:1.2;margin-bottom:14px}
+.cta-final h2 em{font-style:italic;color:rgba(255,255,255,.5)}
+.cta-final p{font-size:16px;color:rgba(255,255,255,.6);max-width:460px;margin:0 auto 32px;line-height:1.6}
+.cta-buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn-wa-main{display:inline-flex;align-items:center;gap:9px;padding:15px 30px;border-radius:12px;background:var(--purple);color:#fff;font-weight:600;font-size:15px;text-decoration:none;transition:transform .12s,background .12s}
+.btn-wa-main:hover{transform:translateY(-2px);background:var(--purple-l)}
+.btn-landing{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:12px;background:transparent;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.78);font-weight:500;font-size:15px;text-decoration:none;transition:border-color .12s,color .12s}
+.btn-landing:hover{border-color:rgba(255,255,255,.5);color:#fff}
+@media(max-width:500px){.cta-buttons{flex-direction:column;align-items:center}}
+
+/* FOOTER */
+.footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:26px 24px;text-align:center;font-size:12.5px;color:rgba(255,255,255,.33)}
+.footer a{color:rgba(255,255,255,.48);text-decoration:none;margin:0 9px}
+.footer a:hover{color:rgba(255,255,255,.8)}
+
+/* STICKY */
+.sticky-wa{display:none;position:fixed;bottom:20px;right:20px;z-index:100;background:var(--purple);color:#fff;padding:13px 20px;border-radius:100px;font-weight:600;font-size:13.5px;text-decoration:none;box-shadow:0 4px 18px rgba(91,63,212,.4);align-items:center;gap:8px;transition:transform .12s}
+.sticky-wa:hover{transform:scale(1.04)}
+@media(max-width:580px){.sticky-wa{display:flex}.form-card{padding:30px 22px}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero-text>*{animation:fadeUp .6s ease both}
+.hero-badge{animation-delay:.05s}.hero h1{animation-delay:.15s}.hero-sub{animation-delay:.25s}.hero-author{animation-delay:.35s}
+</style>
+</head>
+<body>
+
+<a class="sticky-wa" href="https://wa.me/5491165984057?text=Hola%20Mariela%2C%20le%C3%AD%20la%20gu%C3%ADa%20y%20quiero%20saber%20m%C3%A1s%20del%20Programa%20Express">
+  💬 Escribime
+</a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-badge">Auditoría gratuita · Mariela Livy</span>
+      <h1>¿Tu CV y LinkedIn<br>están trabajando para vos<br><em>o en tu contra?</em></h1>
+      <p class="hero-sub">En menos de 5 minutos vas a saber exactamente dónde estás — y qué hacer para dejar de ser invisible en el mercado laboral.</p>
+      <div class="hero-author">
+        <div class="hero-dot">ML</div>
+        <span>Mariela Livy · Lic. en Relaciones Laborales · +200 profesionales acompañados</span>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-circle">
+        <img src="https://i.ibb.co/Z6zzRy12/Whats-App-Image-2025-10-16-at-19-27-37.jpg"
+             alt="Mariela Livy" loading="eager">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOLOR -->
+<section class="pain">
+  <div class="section-inner">
+    <p class="section-label">¿Te sentís así?</p>
+    <h2>Estas situaciones tienen<br>nombre y tienen solución</h2>
+    <ul class="pain-list">
+      <li class="pain-item"><span class="pain-icon">👻</span><span>Aplicás a muchas vacantes y no te llaman. Tu perfil es invisible para los reclutadores.</span></li>
+      <li class="pain-item"><span class="pain-icon">📄</span><span>Tu CV te parece aburrido o desactualizado, y no sabés cómo usar la IA a tu favor.</span></li>
+      <li class="pain-item"><span class="pain-icon">🔵</span><span>LinkedIn te abruma. No sabés qué publicar ni cómo conectar con las personas que importan.</span></li>
+      <li class="pain-item"><span class="pain-icon">💼</span><span>Tenés entrevistas pero no sabés "venderte" — o llegás y el proceso no avanza.</span></li>
+      <li class="pain-item"><span class="pain-icon">⚡</span><span>No sabés si seguir como empleado/a o animarte a emprender. Estás en una encrucijada.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section class="checklist-section" id="checklist">
+  <div class="section-inner">
+    <p class="section-label" style="color:rgba(255,255,255,.45)">Tu diagnóstico</p>
+    <h2>Marcá las situaciones que<br>te representan hoy</h2>
+    <p class="checklist-intro">Hacé click en cada una que te identifique. Al final vas a ver qué nivel de urgencia tiene tu situación.</p>
+    <ul class="checklist" id="checklist-list">
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-mark">✓</span></div><span>Quiero conseguir mi primer empleo, cambiar de sector o de puesto y no sé cómo hacerlo.</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-mark">✓</span></div><span>Siento que mi perfil es "invisible" para los reclutadores o que el mercado me expulsó.</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-mark">✓</span></div><span>No recibo llamados para entrevistas, a pesar de que aplico a muchas vacantes.</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-mark">✓</span></div><span>Mi CV me parece aburrido, desactualizado, o no sé cómo usar la IA a mi favor.</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-mark">✓</span></div><span>LinkedIn me abruma. No sé qué publicar ni cómo contactar a personas clave.</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-mark">✓</span></div><span>Me aterra la idea de negociar mi sueldo o ponerle precio a mis servicios freelance.</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-mark">✓</span></div><span>Estoy en una crisis: no sé si quiero seguir siendo empleado/a o si me animo a emprender.</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-mark">✓</span></div><span>Tengo entrevistas, pero siento que no sé "venderme" o me pongo muy nervioso/a.</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-mark">✓</span></div><span>Me encuentran sobrecalificado/a para todos los puestos y no me eligen.</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-mark">✓</span></div><span>Tengo entrevistas, pero finalmente no avanzo en el proceso de selección.</span></li>
+    </ul>
+    <div class="score-text" id="score-text">Marcá al menos uno para ver tu diagnóstico</div>
+    <div class="score-bar"><div class="score-fill" id="score-fill"></div></div>
+    <div class="score-alert" id="score-alert">🚨 <strong>Tu perfil necesita intervención urgente.</strong> Cada día sin trabajar esto es una oportunidad que se va. El Programa Express de 2 sesiones fue diseñado exactamente para esta situación — contenido 100% práctico basado en años de experiencia real en Gestión de Talentos.</div>
+  </div>
+</section>
+
+<!-- MÉTODO -->
+<section class="formula">
+  <div class="section-inner">
+    <p class="section-label">El método</p>
+    <h2>Qué logramos juntos<br>en dos sesiones</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>CV + Propuesta de Valor Personal</h3>
+          <p>CV que pase filtros ATS, propuesta de valor única, resumen ejecutivo que impacta en 6 segundos y palabras clave estratégicas para tu sector.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>LinkedIn Estratégico + Red de Contactos</h3>
+          <p>Optimización completa de perfil, estrategia de contenido, mapa de red para conectar con las personas correctas y plan de acción de 30 días.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✓</div>
+        <div class="step-content">
+          <h3>Resultados desde el primer día</h3>
+          <p>No charlas genéricas ni plantillas copiadas. Sesiones uno a uno donde salís con todo listo y una estrategia clara para avanzar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO con Formspree -->
+<section class="form-section" id="formulario">
+  <div class="section-inner">
+    <div class="form-card">
+      <div id="form-content">
+        <h2>Recibí esta guía<br>en tu email</h2>
+        <p>Completá tus datos y te enviamos la Auditoría de Perfil e Impacto completa, con el checklist imprimible y los próximos pasos recomendados.</p>
+        <div class="form-group">
+          <label for="nombre">Tu nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="¿Cómo te llamás?" autocomplete="given-name">
+        </div>
+        <div class="form-group">
+          <label for="email">Tu email</label>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" autocomplete="email">
+        </div>
+        <button class="btn-primary" id="submit-btn" onclick="submitForm()">
+          Quiero la guía completa →
+        </button>
+        <p class="form-privacy">Sin spam. Solo contenido que realmente te sirve.</p>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="success-icon">✉️</div>
+        <h3>¡Ya está en camino!</h3>
+        <p>Revisá tu bandeja de entrada. Si querés dar el siguiente paso ahora, escribime directamente.</p>
+        <a href="https://wa.me/5491165984057?text=Hola%20Mariela%2C%20acabo%20de%20descargar%20la%20gu%C3%ADa%20y%20quiero%20saber%20m%C3%A1s%20del%20Programa%20Express" class="btn-wa" target="_blank">
+          💬 Escribirle a Mariela
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios">
+  <div class="section-inner">
+    <p class="section-label">Lo que dicen quienes ya dieron el salto</p>
+    <h2>Profesionales reales,<br>resultados concretos</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Llegué a Mariela después de cinco meses de búsqueda infructuosa. En una hora supo identificar mis pain points y darme consejos concretos para ver resultados de forma inmediata."</p>
+        <div class="testi-author">Diana Jelin</div>
+        <div class="testi-role">Strategic Operations · Account Management</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Desde que trabajé con ella, mi perfil ha captado la atención de reclutadores constantemente. Es una transformación completa en la forma de posicionarse en el mercado laboral."</p>
+        <div class="testi-author">Jeremías Rivelli</div>
+        <div class="testi-role">Desarrollador Backend Java · Full Stack</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Después de trabajar con ella, empecé a tener mucha más visibilidad en LinkedIn. Se nota que realmente le importa ayudar a las personas a crecer."</p>
+        <div class="testi-author">Julián Melmer Stiefkens</div>
+        <div class="testi-role">Software Developer · Ingeniería en Computación</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Me ayudó a potenciar mi CV y mejorar mi perfil de LinkedIn, logrando comunicar mejor mi experiencia. Destaco sus recomendaciones concretas y personalizadas."</p>
+        <div class="testi-author">Candela Godoy Kruuse</div>
+        <div class="testi-role">Product Manager · Marketing · Data Analytics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="section-inner">
+    <h2>Si llegaste hasta acá,<br><em>algo te está diciendo que es el momento.</em></h2>
+    <p>No esperes el momento perfecto. El mercado no espera. Hay cupos limitados esta semana.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/5491165984057?text=Hola%20Mariela%2C%20le%C3%AD%20la%20gu%C3%ADa%20y%20quiero%20conocer%20el%20Programa%20Express" class="btn-wa-main" target="_blank">
+        💬 Escribirle a Mariela por WhatsApp
+      </a>
+      <a href="https://mariela-livy-landing-programa-express.netlify.app" class="btn-landing" target="_blank">
+        Ver el Programa Express →
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>© 2025 LIVY Gestión de Talentos · Mariela Livy</p>
+  <p style="margin-top:8px">
+    <a href="https://wa.me/5491165984057" target="_blank">WhatsApp</a>
+    <a href="https://www.linkedin.com/in/marielalivy/" target="_blank">LinkedIn</a>
+    <a href="https://linktr.ee/livygestiondetalentos" target="_blank">Linktree</a>
+    <a href="https://mariela-livy-landing-programa-express.netlify.app" target="_blank">Programa Express</a>
+  </p>
+</footer>
+
+<script>
+function toggleCheck(el){
+  el.classList.toggle('checked');
+  updateScore();
+}
+
+function updateScore(){
+  const items = document.querySelectorAll('.check-item');
+  const checked = document.querySelectorAll('.check-item.checked').length;
+  const pct = Math.round((checked/items.length)*100);
+  document.getElementById('score-fill').style.width = pct+'%';
+  const txt = document.getElementById('score-text');
+  const alert = document.getElementById('score-alert');
+  if(checked===0){
+    txt.textContent='Marcá al menos uno para ver tu diagnóstico';
+    alert.classList.remove('visible');
+  } else if(checked<=2){
+    txt.textContent=checked+' situación marcada — hay cosas por mejorar. Tiene solución.';
+    alert.classList.add('visible');
+  } else if(checked<=5){
+    txt.textContent=checked+' situaciones marcadas — tu perfil necesita trabajo urgente.';
+    alert.classList.add('visible');
+  } else {
+    txt.textContent='🚨 '+checked+' situaciones marcadas — intervención de emergencia necesaria.';
+    alert.classList.add('visible');
+  }
+}
+
+async function submitForm(){
+  const nombre = document.getElementById('nombre').value.trim();
+  const email  = document.getElementById('email').value.trim();
+  const btn    = document.getElementById('submit-btn');
+
+  if(!nombre){
+    document.getElementById('nombre').style.borderColor='rgba(232,93,47,.8)';
+    document.getElementById('nombre').focus(); return;
+  }
+  if(!email||!email.includes('@')){
+    document.getElementById('email').style.borderColor='rgba(232,93,47,.8)';
+    document.getElementById('email').focus(); return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  try {
+    const res = await fetch('https://formspree.io/f/mzdwbegw', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({ nombre, email,
+        _subject: '📋 Nueva descarga de la Guía de Auditoría — ' + nombre })
+    });
+    if(res.ok){
+      document.getElementById('form-content').style.display='none';
+      document.getElementById('form-success').style.display='block';
+      document.getElementById('formulario').scrollIntoView({behavior:'smooth'});
+    } else {
+      btn.disabled=false;
+      btn.textContent='Quiero la guía completa →';
+      alert('Hubo un problema. Escribime directamente a info@livy.com.ar');
+    }
+  } catch(e){
+    btn.disabled=false;
+    btn.textContent='Quiero la guía completa →';
+  }
+}
+</script>
+</body>
+</html>
